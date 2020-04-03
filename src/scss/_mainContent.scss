@@ -1,0 +1,74 @@
+.container{
+    
+    height: 50em;
+    width: 80%;
+    margin-top: 1em;
+    margin-bottom: 10em;
+
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 1em;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 1em;
+        padding: 0.6em 0.6em 0.6em 0.6em;
+
+    }
+    .active{
+        background-color: red;
+        color: white;
+        padding: 0.6em 0.6em 0.6em 0.6em;
+        border-radius: 5em;
+    }
+   
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+          }
+          .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            
+            
+        
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+           
+          }
+          
+    }
+}
+
+
+.card{
+    padding-top: 2em;
+    position: relative;
+    height: 90%;
+    width: 40%;
+}
