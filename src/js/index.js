@@ -1,4 +1,19 @@
 import Swiper from "swiper";
+import CardBuilder from "./CardBuilder";
+import {cardArray,userCardMaker} from "./CardArray"
+import createViewModel from "./ViewModel"
+
+
+userCardMaker({name:"John Allen",profession:"Blacksmith",email:"jack@yahoo.com",roomNumber:"224"})
+userCardMaker({name:"Jack slals",profession:"Grren Man"})
+userCardMaker({name:"Jack Black",profession:"Grren Man",readMoreLink:"google.com"})
+
+cardArray
+.map(item => createViewModel(item))
+.forEach(view => {
+  document.getElementById("card-container").innerHTML += view;
+})
+
 
 var swiper = new Swiper(".swiper-container", {
   effect: "flip",
@@ -42,3 +57,9 @@ const toggleActive = () => {
 toggleActive();
 
 getElementId("staffTag").click();
+
+//Call userCardMaker foreach row in table
+
+
+
+
