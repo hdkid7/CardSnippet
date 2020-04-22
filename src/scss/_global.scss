@@ -26,4 +26,15 @@ a{
     
     
   }
+  .section{
+    animation: grow .25s;
+}
+@keyframes grow {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
   
