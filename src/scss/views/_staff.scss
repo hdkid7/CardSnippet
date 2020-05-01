@@ -36,19 +36,41 @@
         align-items: center;
         width: 100%;
         height: auto;
+        
+        .card{
+            background-color: transparent;
+            padding-bottom: 2em;
+            height: 400px;
+            width: 200px;
+            margin-right: 1em;
+            margin-left: 1em;
+            perspective: 1000px;
+            
+        }
     
-        .swiper-container {
+        .card-inner {
+            position: relative;
             width: 100%;
             height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
           }
-          .swiper-slide {
+
+          .card:hover .card-inner{
+              transform: rotateY(-180deg);
+          }
+
+          .card-front {
             text-align: center;
             font-size: 18px;
             background: #444444;
             color: white;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
             
-            
-        
             /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
@@ -65,14 +87,41 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-           
-            .back-info{
+
+            .caption{
+                position: absolute;
+                bottom: 1em;
+                left: 0.5em;
+                color: white;
+                text-align: left;
+                line-height: 0.2em;
+                #name{
+                    font-size: 1.3em;
+                    font-weight: bold;
+                }
+                -webkit-backface-visibility: hidden; /* Safari */
+                backface-visibility: hidden;
+            }
+          }
+
+
+
+            .card-back{
+                position: absolute;
                 width: 100%;
+                height: 100%;
                 font-size: 0.8em;
+                text-align: center;
+                -webkit-backface-visibility: hidden; /* Safari */
+                backface-visibility: hidden; 
+                transform: rotateY(-180deg);
+                background-color: #444444;
+                color: white;
+               
+
                 .info{
                     margin: 1em;
                     overflow-wrap: break-word;
-                    
                     span{
                         font-weight: bold;
                     }
@@ -81,6 +130,11 @@
                     font-style: italic;
                 }
                 button{
+                    position: absolute;
+                    bottom: 2em;
+                    left: 50%;
+                    -ms-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -15%);
                     background-color: #990000;
                     padding: 0.8em 1em;
                     border: none;
@@ -90,33 +144,11 @@
                     cursor: pointer;
                 }
             }
-          }
+          
           
     }
 }
 
-
-.card{
-    padding-bottom: 2em;
-    position: relative;
-    height: 400px;
-    width: 200px;
-    margin-right: 1em;
-    margin-left: 1em;
-    .caption{
-        position: absolute;
-        bottom: 1em;
-        left: 0.5em;
-        color: white;
-        text-align: left;
-        line-height: 0.2em;
-
-        #name{
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-    }
-}
 
 #about{
     display: none;
