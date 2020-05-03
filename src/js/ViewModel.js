@@ -12,7 +12,7 @@ const createViewModel = (cardObject) => {
   
         <div class="card-back">
           <div class="info"><span>Phone:</span> <br>${cardObject.phoneNumber} </div>
-          <div class="info">${cardObject.roomNumber}</div>
+          <div class="info"><span>Room:</span> <br>${cardObject.roomNumber}</div>
           <div class="info"><span>Website (URL):</span> ${cardObject.webUrl}</div>
           <div class="info"><span>Email:</span> ${cardObject.email}</div>
           <div class="info" id="skills">${cardObject.description}</div>
