@@ -24,7 +24,7 @@ const userCardMaker = ({
   if (isDefined(imagePath)) card.withImagePath(imagePath);
   if (isDefined(phoneNumber)) card.withPhoneNumber(phoneNumber);
   if (isDefined(roomNumber)) card.withRoomNumber(roomNumber);
-  if (isDefined(webUrl)) card.withName(webUrl);
+  if (isDefined(webUrl)) card.withWebUrl(webUrl);
   if (isDefined(email)) card.withEmail(email);
   if (isDefined(description)) card.withDescription(description);
   if (isDefined(readMoreLink)) card.withReadMoreLink(readMoreLink);

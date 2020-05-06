@@ -2,6 +2,20 @@ import CardBuilder from "./CardBuilder";
 import { cardArray, userCardMaker } from "./CardArray";
 import createViewModel from "./ViewModel";
 
+newArray.forEach(s => {
+  userCardMaker({
+  imagePath:s[0].trim(),
+  name:s[1],
+  profession:s[2],
+  phoneNumber:s[3],
+  roomNumber:s[4],
+  webUrl:s[5],
+  email:s[6],
+  description:s[7],
+  readMoreLink:s[8]
+  })
+   })
+
 userCardMaker({
   name: "Stephen Curry",
   profession: "NBA Player",
@@ -21,6 +35,7 @@ userCardMaker({
   name: "Lil Tecca",
   profession: "Rapper",
   readMoreLink: "google.com",
+  webUrl: "jack.org",
   imagePath:
     "https://static01.nyt.com/images/2019/10/06/arts/music/doas-tecca-promo/GettyImages-1165612474-square640.jpg",
 });
@@ -73,54 +88,80 @@ const displayPage = (pageElement) => {
 
 const getElementId = (element) => document.getElementById(element);
 
-
 const setActiveLink = (id) => {
-  var links = document.querySelectorAll("#header a");
+  var links = document.querySelectorAll("#header div");
 
   for (let index = 0; index < links.length; index++) {
     const element = links[index];
-    const routeName = element.getAttribute("href").substr(1);
+    const routeName = element.getAttribute("id")
 
     if (routeName == id) {
+      
       element.setAttribute("class", "active");
+      
     } else {
       element.removeAttribute("class");
     }
   }
 };
 
-const getContent = (id) => {
-  const routes = {
-    staff: `<div id ="card-container">${staffView}</div>`,
-    about:`<div id="about" class="section"><h1>Example Text</h1></div>`,
-    contact: `<div id="contact" class="section">Example Text Contact Info</div>`,
-  };
 
-  return routes[id];
+var contentDiv = document.getElementById("content");
+
+const routes = {
+  staff: `<div id ="card-container">${staffView}</div>`,
+  about: `<div id="about" class="section"><h1>Example Text</h1></div>`,
+  contact: `<div id="contact" class="section">Example Text Contact Info</div>`,
 };
 
+let state = {
+  initialState: routes.staff,
+};
 
-function navigate() {
- 
-  var contentDiv = document.getElementById("content");
-
-  
-
-  const id = location.hash.substr(1);
-
-  contentDiv.innerHTML = getContent(id);
-
+function render(id) {
+  contentDiv.innerHTML = state.initialState;
   setActiveLink(id);
 }
 
-if (!location.hash) {
-  location.hash = "#staff";
+//Init
+(function initialize() {
+  window.history.replaceState(state, null, "");
+  render(state);
+  setActiveLink("staff");
+})();
+
+function handleStaffClick() {
+  state.initialState = routes.staff;
+  window.history.pushState(state, null, "");
+  render("staff");
 }
 
-navigate();
+function handleAboutClick() {
+  state.initialState = routes.about;
+  window.history.pushState(state, null, "");
+  render("about");
+}
 
-window.addEventListener("hashchange", navigate);
+function handleContactClick() {
+  state.initialState = routes.contact;
+  window.history.pushState(state, null, "");
+  render("contact");
+}
 
+var staff = document.getElementById("staff");
+var about = document.getElementById("about");
+var contact = document.getElementById("contact");
 
+staff.addEventListener("click", handleStaffClick);
+about.addEventListener("click", handleAboutClick);
+contact.addEventListener("click", handleContactClick);
 
-//Call userCardMaker foreach row in table
+window.onpopstate = function (event) {
+  if (event.state) {
+    state = event.state;
+    
+  }
+  render(state);
+ 
+  
+};
