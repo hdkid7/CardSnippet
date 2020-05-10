@@ -2,19 +2,24 @@ import CardBuilder from "./CardBuilder";
 import { cardArray, userCardMaker } from "./CardArray";
 import createViewModel from "./ViewModel";
 
-newArray.forEach(s => {
-  userCardMaker({
-  imagePath:s[0].trim(),
-  name:s[1],
-  profession:s[2],
-  phoneNumber:s[3],
-  roomNumber:s[4],
-  webUrl:s[5],
-  email:s[6],
-  description:s[7],
-  readMoreLink:s[8]
-  })
-   })
+//OMNIUPDATE VARIABLES
+// newArray.forEach(s => {
+//   userCardMaker({
+//   imagePath:s[0].trim(),
+//   name:s[1],
+//   profession:s[2],
+//   phoneNumber:s[3],
+//   roomNumber:s[4],
+//   webUrl:s[5],
+//   email:s[6],
+//   description:s[7],
+//   readMoreLink:s[8]
+//   })
+//    })
+
+//${aboutView}
+
+//${contactView}
 
 userCardMaker({
   name: "Stephen Curry",
@@ -104,15 +109,22 @@ const setActiveLink = (id) => {
     }
   }
 };
-
-
+var staff = document.getElementById("staff");
+var about = document.getElementById("about");
+var contact = document.getElementById("contact");
 var contentDiv = document.getElementById("content");
 
 const routes = {
   staff: `<div id ="card-container">${staffView}</div>`,
-  about: `<div id="about" class="section"><h1>Example Text</h1></div>`,
-  contact: `<div id="contact" class="section">Example Text Contact Info</div>`,
+  about: `<div id="about" class="section">About View<p></p></div>`,
+  contact: `<div id="contact" class="section"><p>Contact View</p></div>`,
 };
+
+const id = {
+  staff:staff,
+  about:about,
+  contact:contact
+}
 
 let state = {
   initialState: routes.staff,
@@ -148,9 +160,7 @@ function handleContactClick() {
   render("contact");
 }
 
-var staff = document.getElementById("staff");
-var about = document.getElementById("about");
-var contact = document.getElementById("contact");
+
 
 staff.addEventListener("click", handleStaffClick);
 about.addEventListener("click", handleAboutClick);
@@ -158,10 +168,12 @@ contact.addEventListener("click", handleContactClick);
 
 window.onpopstate = function (event) {
   if (event.state) {
+    console.log(event.state.initialState)
     state = event.state;
-    
+    setActiveLink(event.state.id);
   }
-  render(state);
+  render(state)
+  setActiveLink(event.state.id);
  
   
 };
