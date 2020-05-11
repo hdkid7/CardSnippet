@@ -65,8 +65,6 @@ userCardMaker({
 userCardMaker({
   name: "Donald Trump",
   profession: "US President",
-  imagePath:
-    "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
 });
 userCardMaker({
   name: "Lamelo Ball",
