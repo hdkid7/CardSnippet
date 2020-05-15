@@ -67,6 +67,20 @@ userCardMaker({
   imagePath:
     "https://api.time.com/wp-content/uploads/2019/04/tyler-blevins-ninja-time-100-2019-002-1.jpg?quality=85&zoom=2",
 });
+userCardMaker({
+  name: "Shiggy",
+  profession: "Comedian",
+  imagePath:
+    "https://static.vibe.com/files/2018/08/GettyImages-1001042940-1533829844-compressed.jpg",
+});
+userCardMaker({
+  name: "Donald Trump",
+  profession: "US President",
+});
+userCardMaker({
+  name: "Lamelo Ball",
+  profession: "Basketball Player",
+});
 
 let staffView = "";
 
@@ -141,7 +155,7 @@ function render(id) {
 })();
 
 const addClickListener = (e, id) =>
-  e.addEventListener("click", function (e) {
+  e.addEventListener("click", () => {
     state.initialState = routes[id];
     console.log(routes[id]);
     window.history.pushState(state, null, "");
