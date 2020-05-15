@@ -1,7 +1,8 @@
 import CardBuilder from "./CardBuilder";
 import { cardArray, userCardMaker } from "./CardArray";
+import { linkArray, linkMaker } from "./LinkArray";
 import createViewModel from "./ViewModel";
-
+//----------------------------------------omni dependecies
 //OMNIUPDATE VARIABLES
 // newArray.forEach(s => {
 //   userCardMaker({
@@ -17,9 +18,19 @@ import createViewModel from "./ViewModel";
 //   })
 //    })
 
+// link array = omniUpdate var name
+// linkArray.forEach
+// (s => {
+//   linkMaker({
+//     linkName:s[0],
+//     linkContent:s[1]
+//   })
+// })
+
 //${aboutView}
 
 //${contactView}
+//----------------------------------------omni dependecies
 
 userCardMaker({
   name: "Stephen Curry",
@@ -56,22 +67,6 @@ userCardMaker({
   imagePath:
     "https://api.time.com/wp-content/uploads/2019/04/tyler-blevins-ninja-time-100-2019-002-1.jpg?quality=85&zoom=2",
 });
-userCardMaker({
-  name: "Shiggy",
-  profession: "Comedian",
-  imagePath:
-    "https://static.vibe.com/files/2018/08/GettyImages-1001042940-1533829844-compressed.jpg",
-});
-userCardMaker({
-  name: "Donald Trump",
-  profession: "US President",
-  imagePath:
-    "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
-});
-userCardMaker({
-  name: "Lamelo Ball",
-  profession: "Basketball Player",
-});
 
 let staffView = "";
 
@@ -81,50 +76,53 @@ cardArray
     staffView += view;
   });
 
-const addActiveClass = (element) => element.classList.add("active");
-const removeActiveClass = (element) => element.classList.remove("active");
+linkMaker({
+  linkName: "Staff",
+  linkContent: `<div id="card-container">
+    ${staffView}
+    </div>`,
+});
+linkMaker({
+  linkName: "about",
+  linkContent: "Lol im here in about",
+});
 
-const header = document.getElementById("header");
-const linksInHeader = header.querySelectorAll(".link");
+const routes = linkArray.reduce(
+  (acc, post) => {
+    let { linkName, linkHtml, linkContentHtml } = post;
+    return { ...acc, [linkName]: (acc[linkName] = linkContentHtml) };
+  },
+  { staff: `<div id ="card-container">${staffView}</div>` }
+);
 
-const displayPage = (pageElement) => {
-  pageElement.style.display = "block";
-};
+console.log(routes);
 
-const getElementId = (element) => document.getElementById(element);
+let links = "";
+
+var header = document.getElementById("header");
+
+linkArray.forEach((item) => {
+  if (item.link != "") links += item.linkHtml;
+});
+
+header.innerHTML = links;
 
 const setActiveLink = (id) => {
   var links = document.querySelectorAll("#header div");
 
   for (let index = 0; index < links.length; index++) {
     const element = links[index];
-    const routeName = element.getAttribute("id")
+    const routeName = element.getAttribute("id");
 
     if (routeName == id) {
-      
       element.setAttribute("class", "active");
-      
     } else {
       element.removeAttribute("class");
     }
   }
 };
-var staff = document.getElementById("staff");
-var about = document.getElementById("about");
-var contact = document.getElementById("contact");
+
 var contentDiv = document.getElementById("content");
-
-const routes = {
-  staff: `<div id ="card-container">${staffView}</div>`,
-  about: `<div id="about" class="section">About View<p></p></div>`,
-  contact: `<div id="contact" class="section"><p>Contact View</p></div>`,
-};
-
-const id = {
-  staff:staff,
-  about:about,
-  contact:contact
-}
 
 let state = {
   initialState: routes.staff,
@@ -139,41 +137,29 @@ function render(id) {
 (function initialize() {
   window.history.replaceState(state, null, "");
   render(state);
-  setActiveLink("staff");
+  setActiveLink("Staff");
 })();
 
-function handleStaffClick() {
-  state.initialState = routes.staff;
-  window.history.pushState(state, null, "");
-  render("staff");
-}
+const addClickListener = (e, id) =>
+  e.addEventListener("click", function (e) {
+    state.initialState = routes[id];
+    console.log(routes[id]);
+    window.history.pushState(state, null, "");
+    render(id);
+  });
+const linkElements = linkArray.map((s) => document.getElementById(s.linkName));
 
-function handleAboutClick() {
-  state.initialState = routes.about;
-  window.history.pushState(state, null, "");
-  render("about");
-}
-
-function handleContactClick() {
-  state.initialState = routes.contact;
-  window.history.pushState(state, null, "");
-  render("contact");
-}
-
-
-
-staff.addEventListener("click", handleStaffClick);
-about.addEventListener("click", handleAboutClick);
-contact.addEventListener("click", handleContactClick);
+linkElements.forEach((s) => {
+  addClickListener(s, s.id);
+  console.log(s.id);
+});
 
 window.onpopstate = function (event) {
   if (event.state) {
-    console.log(event.state.initialState)
+    console.log(event.state.initialState);
     state = event.state;
     setActiveLink(event.state.id);
   }
-  render(state)
+  render(state);
   setActiveLink(event.state.id);
- 
-  
 };
