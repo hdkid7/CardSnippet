@@ -1,0 +1,25 @@
+{
+  "name": "ParcelStarterKit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "parcel-plugin-imagemin": "^4.0.1",
+    "sass": "^1.26.5"
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.9.4",
+    "normalize.css": "^8.0.1",
+    "smoothscroll-polyfill": "^0.4.4",
+    "swiper": "^5.4.0"
+  }
+}
