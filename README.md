@@ -2,4 +2,4 @@
 Card snippet for internship
 
 
-!![](ezgif.com-gif-maker.mkv)
+!![](ezgif.com-gif-maker.gif)
